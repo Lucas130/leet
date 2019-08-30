@@ -3,10 +3,6 @@
 """
 
 
-# class Solution:
-#     def maxSubArray(self, nums: list[int]) -> int:
-#         pass
-
 class Solution:
     def maxSubArray(self, nums):
         '''
