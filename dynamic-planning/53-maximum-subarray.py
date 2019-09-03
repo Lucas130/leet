@@ -1,25 +1,26 @@
 """
 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+最大连续子序列一定是以某个元素结尾的，那么我们就思考以nums中每个元素结尾的连续子序列其最大和是多少。
 """
-
 
 class Solution:
     def maxSubArray(self, nums):
-        '''
-        思路：
-        最大连续子序列一定是以某个元素结尾的，那么我们就思考以nums中每个元素结尾的
-        连续子序列其最大和是多少。
-        status数组存以nums[i]结尾的子序列的最大和，那么当思考nums[i+1]结尾的子序列
-        的最大和时，显然只要考虑两种情况，（1）是与以nums[i]结尾的最大子序列结合？
-        （2）还是以自己nums[i+1]为子序列？
-        '''
-        status = [nums[0]]
-        for i in range(1, len(nums)):
-            if nums[i]+status[i-1] > nums[i]:
-                status.append(nums[i]+status[i-1])
-            else:
-                status.append(nums[i])
-        return max(status)
+        # status = [nums[0]]
+        # for i in range(1, len(nums)):
+        #     if nums[i]+status[i-1] > nums[i]:
+        #         status.append(nums[i]+status[i-1])
+        #     else:
+        #         status.append(nums[i])
+        # return max(status)
+
+        max_sum, cur_sum = float('-inf'), 0
+        for i in range(len(nums)):
+            cur_sum += nums[i]
+            if cur_sum > max_sum:
+                max_sum = cur_sum
+            if cur_sum < 0:
+                cur_sum = 0
+        return max_sum
 
 
 if __name__ == '__main__':

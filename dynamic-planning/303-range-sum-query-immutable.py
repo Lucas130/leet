@@ -12,7 +12,7 @@ class NumArray:
                 continue
             self.nums[i] = self.nums[i] + self.nums[i - 1]
 
-    def sumRange(self, i: int, j: int) -> int:
+    def sumRange(self, i, j):
         if i > 0:
             return self.nums[j] - self.nums[i - 1]
         return self.nums[j]
