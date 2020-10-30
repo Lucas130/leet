@@ -4,25 +4,19 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        s_list = list()
-        s_set = set()
-        count = 0
-        for item in s:
-            if item not in s_set:
-                s_set.add(item)
-                s_list.append(item)
-            else:
-                if not s_list:
-                    s_list.append(item)
-                    continue
-                if s_list[-1] == item:
-                    s_list.append(item)
-                else:
-                    count = len(s_list) if len(s_list) > count else count
-                    s_list = [item]
-        return count
+        occ = set()
+        n = len(s)
+        rk, ans = -1, 0
+        for i in range(n):
+            if i != 0:
+                occ.remove(s[i - 1])
+            while rk + 1 < n and s[rk + 1] not in occ:
+                occ.add(s[rk + 1])
+                rk += 1
+            ans = max(ans, len(occ))
+        return ans
 
 if __name__ == '__main__':
     s = Solution()
-    st = "abcabcbb"
+    st = "pwwkew"
     print(s.lengthOfLongestSubstring(st))
