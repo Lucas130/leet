@@ -8,11 +8,21 @@ class Node:
         self.right = right
 """
 class Solution:
-    def treeLeft(self, root):
-        ...
-
-    def treeRight(self, root):
-        ...
 
     def treeToDoublyList(self, root):
-        ...
+        if not root:
+            return root
+        self.pre = None
+        self.dfs(root)
+        self.head.left, self.pre.right = self.pre, self.head
+
+    def dfs(self, cur):
+        if not cur:
+            return
+        self.dfs(cur.left)
+        if self.pre:
+            self.pre.right, cur.left = cur, self.pre
+        else:
+            self.head = cur
+        self.pre = cur
+        self.dfs(cur.right)
